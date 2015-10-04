@@ -1,4 +1,4 @@
-package io.github.gothwski.mygithubprofile.io.model;
+package io.github.gothwski.mygithubprofile.io.domain;
 
 import com.google.gson.annotations.SerializedName;
 

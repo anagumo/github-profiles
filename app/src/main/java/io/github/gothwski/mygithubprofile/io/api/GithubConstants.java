@@ -1,9 +1,9 @@
-package io.github.gothwski.mygithubprofile.io;
+package io.github.gothwski.mygithubprofile.io.api;
 
 /**
  * Created by ariana gothwski on 13/07/15.
  */
-public class ApiConstants {
+public class GithubConstants {
 
     public static final String URL_BASE = "https://api.github.com";
 

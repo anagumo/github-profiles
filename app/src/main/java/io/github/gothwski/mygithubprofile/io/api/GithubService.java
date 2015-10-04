@@ -1,6 +1,7 @@
-package io.github.gothwski.mygithubprofile.io;
+package io.github.gothwski.mygithubprofile.io.api;
 
-import io.github.gothwski.mygithubprofile.io.model.User;
+import io.github.gothwski.mygithubprofile.io.api.GithubConstants;
+import io.github.gothwski.mygithubprofile.io.domain.User;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -10,6 +11,6 @@ import retrofit.http.Path;
  */
 public interface GithubService {
 
-    @GET(ApiConstants.URL_USER)
+    @GET(GithubConstants.URL_USER)
     void getGithubProfile(@Path("user") String user, Callback<User> callback);
 }

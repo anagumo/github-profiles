@@ -1,4 +1,4 @@
-package io.github.gothwski.mygithubprofile.io;
+package io.github.gothwski.mygithubprofile.io.api;
 
 import retrofit.RestAdapter;
 
@@ -13,7 +13,7 @@ public class GitHubAdapter {
 
         if (API_SERVICE == null) {
             RestAdapter adapter = new RestAdapter.Builder()
-                    .setEndpoint(ApiConstants.URL_BASE)
+                    .setEndpoint(GithubConstants.URL_BASE)
                     .build();
 
             API_SERVICE = adapter.create(GithubService.class);
