@@ -1,6 +1,7 @@
 package io.github.gothwski.mygithubprofile.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +18,6 @@ import retrofit.client.Response;
 
 public class MainActivity extends BaseActivity implements Callback<User> {
 
-    @Bind(R.id.textName)
-    TextView mName;
     @Bind(R.id.textUsername)
     TextView mUsername;
     @Bind(R.id.textCompany)
@@ -29,6 +28,8 @@ public class MainActivity extends BaseActivity implements Callback<User> {
     TextView mBlog;
     @Bind(R.id.imgAvatar)
     ImageView mAvatar;
+    @Bind(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends BaseActivity implements Callback<User> {
     protected void onResume() {
         super.onResume();
         GitHubAdapter.getApiService()
-                .getGithubProfile("josevalim", this);
+                .getGithubProfile("android10", this);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity implements Callback<User> {
 
     public void setDataProfile(User user) {
         //TODO: Clean Code
-        mName.setText(user.getName());
+        collapsingToolbar.setTitle(user.getName());
         mUsername.setText(user.getUsername());
         mCompany.setText(user.getCompany());
         mMail.setText(user.getEmail());
