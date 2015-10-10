@@ -1,13 +1,13 @@
-package io.github.gothwski.mygithubprofile.io.api;
+package io.github.gothwski.mygithubprofile.io;
 
-import io.github.gothwski.mygithubprofile.io.api.GithubConstants;
-import io.github.gothwski.mygithubprofile.io.domain.User;
+import io.github.gothwski.mygithubprofile.domain.User;
+import io.github.gothwski.mygithubprofile.io.GithubConstants;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
 /**
- * Created by ariana gothwski on 13/07/15.
+ * Created by ariana on 13/07/15.
  */
 public interface GithubService {
 

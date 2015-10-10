@@ -9,7 +9,7 @@ import butterknife.ButterKnife;
 import io.github.gothwski.mygithubprofile.R;
 
 /**
- * Created by gothwski on 3/10/15.
+ * Created by ariana on 3/10/15.
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
