@@ -1,9 +1,9 @@
-package io.github.gothwski.mygithubprofile.io.api;
+package io.github.gothwski.mygithubprofile.io;
 
 import retrofit.RestAdapter;
 
 /**
- * Created by ariana gothwski on 13/07/15.
+ * Created by ariana on 13/07/15.
  */
 public class GitHubAdapter {
 

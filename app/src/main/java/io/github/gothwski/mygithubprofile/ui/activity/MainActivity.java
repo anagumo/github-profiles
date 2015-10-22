@@ -1,7 +1,8 @@
 package io.github.gothwski.mygithubprofile.ui.activity;
 
-import android.os.Bundle;
+import android.content.Context;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,14 +10,12 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import io.github.gothwski.mygithubprofile.R;
-import io.github.gothwski.mygithubprofile.io.api.GitHubAdapter;
-import io.github.gothwski.mygithubprofile.io.domain.User;
+import io.github.gothwski.mygithubprofile.domain.User;
+import io.github.gothwski.mygithubprofile.presenter.MainPresenterImpl;
 import io.github.gothwski.mygithubprofile.ui.commons.BaseActivity;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import io.github.gothwski.mygithubprofile.ui.modelview.MainView;
 
-public class MainActivity extends BaseActivity implements Callback<User> {
+public class MainActivity extends BaseActivity implements MainView {
 
     @Bind(R.id.textUsername)
     TextView mUsername;
@@ -31,10 +30,7 @@ public class MainActivity extends BaseActivity implements Callback<User> {
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    MainPresenterImpl mainPresenterImpl;
 
     @Override
     protected int getLayout() {
@@ -44,38 +40,29 @@ public class MainActivity extends BaseActivity implements Callback<User> {
     @Override
     protected void onResume() {
         super.onResume();
-        GitHubAdapter.getApiService()
-                .getGithubProfile("android10", this);
+        mainPresenterImpl = new MainPresenterImpl(this);
+        mainPresenterImpl.onSearchUser(getString(R.string.user));
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void success(User user, Response response) {
-        setDataProfile(user);
-        setAvatarProfile(user);
-    }
-
-    @Override
-    public void failure(RetrofitError error) {
-        error.printStackTrace();
-    }
-
-    public void setDataProfile(User user) {
-        //TODO: Clean Code
+    public void showDataProfile(User user) {
         collapsingToolbar.setTitle(user.getName());
         mUsername.setText(user.getUsername());
         mCompany.setText(user.getCompany());
         mMail.setText(user.getEmail());
         mBlog.setText(user.getBlog());
+        setAvatarProfile(user);
     }
 
-    public void setAvatarProfile(User user){
+    public void setAvatarProfile(User user) {
         Picasso.with(getBaseContext())
                 .load(user.getAvatarURL())
                 .into(mAvatar);
+    }
+
+    @Override
+    public void showNetworkError(String message) {
+        Snackbar.make(mBlog, message, Snackbar.LENGTH_LONG)
+                .show();
     }
 }

@@ -1,7 +1,7 @@
-package io.github.gothwski.mygithubprofile.io.domain;
+package io.github.gothwski.mygithubprofile.domain;
 
 /**
- * Created by ariana gothwski on 13/07/15.
+ * Created by ariana on 13/07/15.
  */
 public class JsonKeys {
     public static final String USERNAME = "login";
