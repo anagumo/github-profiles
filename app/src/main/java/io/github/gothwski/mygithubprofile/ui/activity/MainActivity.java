@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 
 import butterknife.Bind;
 import io.github.gothwski.mygithubprofile.R;
-import io.github.gothwski.mygithubprofile.io.api.GitHubAdapter;
+import io.github.gothwski.mygithubprofile.io.api.GithubService;
 import io.github.gothwski.mygithubprofile.io.domain.User;
 import io.github.gothwski.mygithubprofile.ui.commons.BaseActivity;
 import retrofit2.Call;
@@ -43,9 +43,9 @@ public class MainActivity extends BaseActivity implements Callback<User> {
     }
 
     private void fetchUserProfile() {
-        GitHubAdapter
-                .getApiService()
-                .getGithubProfile("android10")
+        GithubService
+                .getApi()
+                .getUserProfile("android10")
                 .enqueue(this);
     }
 

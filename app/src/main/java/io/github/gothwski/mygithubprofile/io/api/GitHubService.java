@@ -6,21 +6,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by ariana gothwski on 13/07/15.
  */
-public class GitHubAdapter {
+public class GithubService {
 
-    private static GithubService API_SERVICE;
+    private static GithubApi GITHUB_API;
 
-    public static GithubService getApiService() {
+    public static GithubApi getApi() {
 
-        if (API_SERVICE == null) {
+        if (GITHUB_API == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(GithubConstants.URL_BASE)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            API_SERVICE = retrofit.create(GithubService.class);
+            GITHUB_API = retrofit.create(GithubApi.class);
         }
 
-        return API_SERVICE;
+        return GITHUB_API;
     }
 }

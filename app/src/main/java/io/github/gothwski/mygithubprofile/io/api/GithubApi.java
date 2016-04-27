@@ -8,8 +8,8 @@ import retrofit2.http.Path;
 /**
  * Created by ariana gothwski on 13/07/15.
  */
-public interface GithubService {
+public interface GithubApi {
 
     @GET(GithubConstants.URL_USER)
-    Call<User> getGithubProfile(@Path("user") String user);
+    Call<User> getUserProfile(@Path("user") String user);
 }

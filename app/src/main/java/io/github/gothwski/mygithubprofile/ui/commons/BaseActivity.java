@@ -26,11 +26,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract int getLayout();
 
-    public void setupToolbar(){
+    public void setupToolbar() {
         setSupportActionBar(toolbar);
     }
 
-    private void injectViews(){
+    private void injectViews() {
         ButterKnife.bind(this);
     }
 }
