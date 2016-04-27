@@ -1,6 +1,7 @@
 package io.github.gothwski.mygithubprofile.io.api;
 
-import retrofit.RestAdapter;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by ariana gothwski on 13/07/15.
@@ -12,11 +13,12 @@ public class GitHubAdapter {
     public static GithubService getApiService() {
 
         if (API_SERVICE == null) {
-            RestAdapter adapter = new RestAdapter.Builder()
-                    .setEndpoint(GithubConstants.URL_BASE)
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(GithubConstants.URL_BASE)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
-            API_SERVICE = adapter.create(GithubService.class);
+            API_SERVICE = retrofit.create(GithubService.class);
         }
 
         return API_SERVICE;

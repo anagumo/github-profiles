@@ -5,16 +5,16 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import butterknife.Bind;
 import io.github.gothwski.mygithubprofile.R;
 import io.github.gothwski.mygithubprofile.io.api.GitHubAdapter;
 import io.github.gothwski.mygithubprofile.io.domain.User;
 import io.github.gothwski.mygithubprofile.ui.commons.BaseActivity;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements Callback<User> {
 
@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity implements Callback<User> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fetchUserProfile();
     }
 
     @Override
@@ -41,31 +42,26 @@ public class MainActivity extends BaseActivity implements Callback<User> {
         return R.layout.activity_main;
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        GitHubAdapter.getApiService()
-                .getGithubProfile("android10", this);
+    private void fetchUserProfile() {
+        GitHubAdapter
+                .getApiService()
+                .getGithubProfile("android10")
+                .enqueue(this);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void success(User user, Response response) {
+    public void onResponse(Call<User> call, Response<User> response) {
+        User user = response.body();
         setDataProfile(user);
         setAvatarProfile(user);
     }
 
     @Override
-    public void failure(RetrofitError error) {
-        error.printStackTrace();
+    public void onFailure(Call<User> call, Throwable t) {
+        //TODO: Log error here since request failed
     }
 
     public void setDataProfile(User user) {
-        //TODO: Clean Code
         collapsingToolbar.setTitle(user.getName());
         mUsername.setText(user.getUsername());
         mCompany.setText(user.getCompany());
@@ -73,8 +69,8 @@ public class MainActivity extends BaseActivity implements Callback<User> {
         mBlog.setText(user.getBlog());
     }
 
-    public void setAvatarProfile(User user){
-        Picasso.with(getBaseContext())
+    public void setAvatarProfile(User user) {
+        Glide.with(getBaseContext())
                 .load(user.getAvatarURL())
                 .into(mAvatar);
     }
