@@ -1,39 +1,33 @@
 package io.github.gothwski.mygithubprofile.user;
 
-import io.github.gothwski.mygithubprofile.data.GithubService;
+import io.github.gothwski.mygithubprofile.data.UserRepository;
 import io.github.gothwski.mygithubprofile.model.User;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Ariana on 13/05/16.
  */
-public class UserProfilePresenter implements Callback<User> {
+public class UserProfilePresenter {
 
     private UserProfileContract.View mView;
+    private UserRepository mUserRepository;
 
 
-    public UserProfilePresenter(UserProfileContract.View view) {
+    public UserProfilePresenter(UserProfileContract.View view, UserRepository userRepository) {
         mView = view;
+        mUserRepository = userRepository;
     }
 
-    //TODO: Add Repository pattern
-    public void fetchUserProfile() {
-        GithubService
-                .getApi()
-                .getUserProfile("android10")
-                .enqueue(this);
-    }
+    public void fetchUserProfile(String user) {
+        mUserRepository.fetchUserProfile(user, new UserRepository.Callback<User>() {
+            @Override
+            public void onSuccess(User response) {
+                mView.showUserProfile(response);
+            }
 
-    @Override
-    public void onResponse(Call<User> call, Response<User> response) {
-        User user = response.body();
-        mView.showUserProfile(user);
-    }
+            @Override
+            public void onError(Throwable error) {
 
-    @Override
-    public void onFailure(Call<User> call, Throwable t) {
-
+            }
+        });
     }
 }

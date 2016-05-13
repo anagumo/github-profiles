@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import butterknife.Bind;
 import io.github.gothwski.mygithubprofile.R;
 import io.github.gothwski.mygithubprofile.common.BaseActivity;
+import io.github.gothwski.mygithubprofile.data.Injection;
 import io.github.gothwski.mygithubprofile.model.User;
 
 public class UserProfileActivity extends BaseActivity implements UserProfileContract.View {
@@ -35,8 +36,8 @@ public class UserProfileActivity extends BaseActivity implements UserProfileCont
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter = new UserProfilePresenter(this);
-        mPresenter.fetchUserProfile();
+        mPresenter = new UserProfilePresenter(this, Injection.provideUserRepository());
+        mPresenter.fetchUserProfile("android10");
     }
 
     public void setDataProfile(User user) {

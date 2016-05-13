@@ -2,29 +2,29 @@ package io.github.gothwski.mygithubprofile.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import io.github.gothwski.mygithubprofile.data.JsonKeys;
+import io.github.gothwski.mygithubprofile.Constants;
 
 /**
  * Created by ariana gothwski on 13/07/15.
  */
 public class User {
 
-    @SerializedName(JsonKeys.USERNAME)
+    @SerializedName(Constants.UserJsonKeys.USERNAME)
     private String username;
 
-    @SerializedName(JsonKeys.NAME)
+    @SerializedName(Constants.UserJsonKeys.NAME)
     private String name;
 
-    @SerializedName(JsonKeys.AVATAR_URL)
+    @SerializedName(Constants.UserJsonKeys.AVATAR_URL)
     private String avatarURL;
 
-    @SerializedName(JsonKeys.COMPANY)
+    @SerializedName(Constants.UserJsonKeys.COMPANY)
     private String company;
 
-    @SerializedName(JsonKeys.BLOG)
+    @SerializedName(Constants.UserJsonKeys.BLOG)
     private String blog;
 
-    @SerializedName(JsonKeys.EMAIL)
+    @SerializedName(Constants.UserJsonKeys.EMAIL)
     private String email;
 
     public String getUsername() {
