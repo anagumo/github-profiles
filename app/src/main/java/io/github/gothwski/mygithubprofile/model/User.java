@@ -1,6 +1,8 @@
-package io.github.gothwski.mygithubprofile.io.domain;
+package io.github.gothwski.mygithubprofile.model;
 
 import com.google.gson.annotations.SerializedName;
+
+import io.github.gothwski.mygithubprofile.data.JsonKeys;
 
 /**
  * Created by ariana gothwski on 13/07/15.

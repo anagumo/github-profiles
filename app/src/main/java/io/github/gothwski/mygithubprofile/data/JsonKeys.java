@@ -1,4 +1,4 @@
-package io.github.gothwski.mygithubprofile.io.domain;
+package io.github.gothwski.mygithubprofile.data;
 
 /**
  * Created by ariana gothwski on 13/07/15.

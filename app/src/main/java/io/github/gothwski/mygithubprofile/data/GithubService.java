@@ -1,5 +1,7 @@
-package io.github.gothwski.mygithubprofile.io.api;
+package io.github.gothwski.mygithubprofile.data;
 
+import io.github.gothwski.mygithubprofile.data.GithubApi;
+import io.github.gothwski.mygithubprofile.data.GithubConstants;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

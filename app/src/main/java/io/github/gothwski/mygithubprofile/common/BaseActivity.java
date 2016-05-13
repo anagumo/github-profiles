@@ -1,4 +1,4 @@
-package io.github.gothwski.mygithubprofile.ui.commons;
+package io.github.gothwski.mygithubprofile.common;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

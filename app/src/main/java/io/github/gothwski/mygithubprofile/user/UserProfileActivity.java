@@ -1,6 +1,5 @@
-package io.github.gothwski.mygithubprofile.ui.activity;
+package io.github.gothwski.mygithubprofile.user;
 
-import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,14 +8,10 @@ import com.bumptech.glide.Glide;
 
 import butterknife.Bind;
 import io.github.gothwski.mygithubprofile.R;
-import io.github.gothwski.mygithubprofile.io.api.GithubService;
-import io.github.gothwski.mygithubprofile.io.domain.User;
-import io.github.gothwski.mygithubprofile.ui.commons.BaseActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.github.gothwski.mygithubprofile.common.BaseActivity;
+import io.github.gothwski.mygithubprofile.model.User;
 
-public class MainActivity extends BaseActivity implements Callback<User> {
+public class UserProfileActivity extends BaseActivity implements UserProfileContract.View {
 
     @Bind(R.id.textUsername)
     TextView mUsername;
@@ -30,35 +25,18 @@ public class MainActivity extends BaseActivity implements Callback<User> {
     ImageView mAvatar;
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        fetchUserProfile();
-    }
+    private UserProfilePresenter mPresenter;
 
     @Override
     protected int getLayout() {
         return R.layout.activity_main;
     }
 
-    private void fetchUserProfile() {
-        GithubService
-                .getApi()
-                .getUserProfile("android10")
-                .enqueue(this);
-    }
-
     @Override
-    public void onResponse(Call<User> call, Response<User> response) {
-        User user = response.body();
-        setDataProfile(user);
-        setAvatarProfile(user);
-    }
-
-    @Override
-    public void onFailure(Call<User> call, Throwable t) {
-        //TODO: Log error here since request failed
+    protected void onResume() {
+        super.onResume();
+        mPresenter = new UserProfilePresenter(this);
+        mPresenter.fetchUserProfile();
     }
 
     public void setDataProfile(User user) {
@@ -73,5 +51,11 @@ public class MainActivity extends BaseActivity implements Callback<User> {
         Glide.with(getBaseContext())
                 .load(user.getAvatarURL())
                 .into(mAvatar);
+    }
+
+    @Override
+    public void showUserProfile(User user) {
+        setDataProfile(user);
+        setAvatarProfile(user);
     }
 }

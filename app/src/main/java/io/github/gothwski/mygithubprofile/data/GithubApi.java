@@ -1,6 +1,6 @@
-package io.github.gothwski.mygithubprofile.io.api;
+package io.github.gothwski.mygithubprofile.data;
 
-import io.github.gothwski.mygithubprofile.io.domain.User;
+import io.github.gothwski.mygithubprofile.model.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
