@@ -37,7 +37,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileCont
     protected void onResume() {
         super.onResume();
         mPresenter = new UserProfilePresenter(this, Injection.provideUserRepository());
-        mPresenter.fetchUserProfile("android10");
+        mPresenter.fetchUserProfile("torvalds");
     }
 
     public void setDataProfile(User user) {

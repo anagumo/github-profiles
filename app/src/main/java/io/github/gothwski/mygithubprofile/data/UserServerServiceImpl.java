@@ -13,20 +13,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class UserServerServiceImpl implements UserServerService {
 
-    private static RetrofitUserApi userApi;
+    private RetrofitUserApi userApi;
 
-    public static RetrofitUserApi getUserApi() {
+    public UserServerServiceImpl() {
 
-        if (userApi == null) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.Api.URL_BASE)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constants.Api.URL_BASE)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-            userApi = retrofit.create(RetrofitUserApi.class);
-        }
-
-        return userApi;
+        userApi = retrofit.create(RetrofitUserApi.class);
     }
 
     @Override
